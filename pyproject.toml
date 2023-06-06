@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "postgres-homeworks"
+version = "0.1.0"
+description = ""
+authors = ["Евгений Минин <evgenminin1988@mail.ru>"]
+readme = "README.md"
+packages = [{include = "postgres_homeworks"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+psycopg2-binary = "^2.9.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
