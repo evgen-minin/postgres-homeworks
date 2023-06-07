@@ -1,15 +1,9 @@
 """Скрипт для заполнения данными таблиц в БД Postgres."""
 import csv
 import psycopg2
-from config import host, user, password, db_name
+from dotenv import dotenv_values
 
-
-def create_table(table_name, columns):
-    create_query = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns})"
-    with psycopg2.connect(host=host, user=user, password=password, database=db_name) as connection:
-        with connection.cursor() as cursor:
-            cursor.execute(create_query)
-            connection.commit()
+config = dotenv_values('.env')
 
 
 def insert_data_from_csv(filename, table_name):
@@ -19,7 +13,12 @@ def insert_data_from_csv(filename, table_name):
 
         insert_query = f"INSERT INTO {table_name} VALUES ({', '.join(['%s'] * len(header))})"
 
-        with psycopg2.connect(host=host, user=user, password=password, database=db_name) as connection:
+        with psycopg2.connect(
+                host=config['HOST'],
+                user=config['USER'],
+                password=config['PASSWORD'],
+                database=config['DB_NAME'],
+        ) as connection:
             with connection.cursor() as cursor:
                 try:
                     cursor.executemany(insert_query, csv_data)

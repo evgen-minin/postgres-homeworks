@@ -8,6 +8,7 @@ packages = [{include = "postgres_homeworks"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+python-dotenv = "^1.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
